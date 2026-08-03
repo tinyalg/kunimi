@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build & cache
+dist/
+.cache/
+*.tsbuildinfo
+
+# Logs
+*.log
+
+# Cloudflare Wrangler & environment secrets
+.wrangler/
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
+
+# Local data and backup files
+backup.sql
+allowed-domains.json
+
+# System files
+.DS_Store
+Thumbs.db
