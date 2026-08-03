@@ -87,4 +87,23 @@ export const dashboardStyle = `
     content: "↳ "; /* 階層っぽく見せる矢印 */
     color: #95a5a6;
   }
+    .pagination-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 15px;
+      padding: 10px 0;
+    }
+    .pagination-controls button {
+      padding: 6px 12px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+    }
+    .pagination-controls button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 `;

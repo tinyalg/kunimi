@@ -19,6 +19,7 @@ export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext) {
     const requestUrl = new URL(request.url);
     const lang = getLanguage(request);
+    
     // =========================================================
     // 【1】アクセス記録用ピクセル（誰でもアクセスOK）
     // =========================================================
@@ -52,7 +53,7 @@ export default {
         const ua = request.headers.get('user-agent') || '';
         const isBot = /bot|spider|crawl|headless/i.test(ua);
         
-        // ★ ボットからのアクセスは集計に入れないため、ここで処理を終了
+        // ボットからのアクセスは集計に入れないため、ここで処理を終了
         if (isBot) return;
 
         const device = /mobile|iphone|android/i.test(ua) ? 'mobile' : 'desktop';
@@ -157,9 +158,27 @@ export default {
       return new Response(JSON.stringify(results), { headers: { 'Content-Type': 'application/json' } });
     }
 
-    // ② 表用のAPI（セッション単位から、時間帯・パス別のPVランキングに変更）
+    // ② 表用のAPI（ページング対応）
     if (requestUrl.pathname === '/api/sessions') {
       const validDays = getValidDays(requestUrl);
+      const page = parseInt(requestUrl.searchParams.get('page') || '1', 10);
+      const limit = 10; // 1ページあたりの表示件数
+      const offset = (page - 1) * limit;
+
+      // 1. 全レコード数の取得（ページ数計算のため）
+      const countResult = await env.DB.prepare(`
+        SELECT COUNT(*) as total FROM (
+          SELECT 1
+          FROM hourly_stats 
+          WHERE date >= date('now', '-${validDays} days')
+          GROUP BY date, hour, country, device, path
+        )
+      `).first<{ total: number }>();
+      
+      const totalRows = countResult ? countResult.total : 0;
+      const totalPages = totalRows > 0 ? Math.ceil(totalRows / limit) : 1;
+
+      // 2. 現在のページのデータを取得
       const { results } = await env.DB.prepare(`
         SELECT 
           date,
@@ -172,9 +191,15 @@ export default {
         WHERE date >= date('now', '-${validDays} days')
         GROUP BY date, hour, country, device, path
         ORDER BY date DESC, hour DESC, pv_count DESC
-        LIMIT 100
-      `).all();
-      return new Response(JSON.stringify(results), { headers: { 'Content-Type': 'application/json' } });
+        LIMIT ? OFFSET ?
+      `).bind(limit, offset).all();
+
+      // 配列ではなくオブジェクトにして返す
+      return new Response(JSON.stringify({ 
+        data: results, 
+        currentPage: page,
+        totalPages: totalPages 
+      }), { headers: { 'Content-Type': 'application/json' } });
     }
 
     return new Response('Not Found', { status: 404 });
