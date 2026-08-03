@@ -18,7 +18,6 @@ dist/
 
 # Local data and backup files
 backup.sql
-allowed-domains.json
 
 # System files
 .DS_Store
