@@ -51,15 +51,8 @@ npx wrangler d1 create my-kunimi-db
 This command will output a `database_id`.
 *Note: If Wrangler asks "Would you like Wrangler to add it on your behalf?", **press `N` (No)**.*
 
-### 3. Initialize the Database Table
 
-Apply the included database schema to create the required table for your remote environment.
-
-```bash
-npx wrangler d1 execute my-kunimi-db --remote --file=./migrations/0001_initial.sql
-```
-
-### 4. Configure `wrangler.jsonc`
+### 3. Configure `wrangler.jsonc`
 
 Edit your `wrangler.jsonc`.
 
@@ -87,6 +80,14 @@ Edit your `wrangler.jsonc`.
   }
 }
 
+```
+
+### 4. Initialize the Database Table
+
+Apply the included database schema to create the required table for your remote environment.
+
+```bash
+npx wrangler d1 execute my-kunimi-db --remote --file=./migrations/0001_initial.sql
 ```
 
 ### 5. Set Dashboard Password
@@ -126,13 +127,13 @@ You can easily backup or restore your analytics data using Wrangler commands.
 ### Exporting Data (Backup)
 
 ```bash
-npx wrangler d1 export kunimi-db --remote --output=./backup.sql
+npx wrangler d1 export my-kunimi-db --remote --output=./backup.sql
 ```
 
 ### Importing Data (Restore)
 
 ```bash
-npx wrangler d1 execute kunimi-db --remote --file=./backup.sql
+npx wrangler d1 execute my-kunimi-db --remote --file=./backup.sql
 ```
 
 ## 📊 Performance & Limitations

@@ -47,6 +47,7 @@ export const dashboardHtml = `<!DOCTYPE html>
         <thead>
           <tr>
             <th data-i18n="thDate">日時</th>
+            <th data-i18n="thDomain">ドメイン</th>
             <th data-i18n="thCountry">国</th>
             <th data-i18n="thDevice">デバイス</th>
             <th data-i18n="thPv">PV</th>

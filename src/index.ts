@@ -183,13 +183,14 @@ export default {
         SELECT 
           date,
           hour,
+          host,
           country, 
           device, 
           path,
           SUM(pv_count) as pv_count
         FROM hourly_stats 
         WHERE date >= date('now', '-${validDays} days')
-        GROUP BY date, hour, country, device, path
+        GROUP BY date, hour, host, country, device, path
         ORDER BY date DESC, hour DESC, pv_count DESC
         LIMIT ? OFFSET ?
       `).bind(limit, offset).all();

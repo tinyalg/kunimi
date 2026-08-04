@@ -12,6 +12,7 @@
         optLocalTime: 'ローカル時刻',
         tableTitle: '📋 アクセス一覧 (時間帯・パス別)',
         thDate: '日時',
+        thDomain: 'ドメイン',
         thCountry: '国',
         thDevice: 'デバイス',
         thPv: 'PV',
@@ -34,6 +35,7 @@
         optLocalTime: 'Local Time',
         tableTitle: '📋 Access Logs (Hourly / Path)',
         thDate: 'Date & Time',
+        thDomain: 'Domain',
         thCountry: 'Country',
         thDevice: 'Device',
         thPv: 'PV',
@@ -167,6 +169,7 @@
           
           tr.innerHTML = 
             '<td>' + dateStr + '</td>' +
+            '<td>' + row.host + '</td>' +
             '<td>' + row.country + '</td>' +
             '<td>' + row.device + '</td>' +
             '<td>' + row.pv_count + '</td>' +
