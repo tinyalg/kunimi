@@ -44,7 +44,7 @@ npm install
 Create a new Cloudflare D1 database and add the generated `database_id` to your `wrangler.jsonc` file.
 
 ```bash
-npx wrangler d1 create kunimi-db
+npx wrangler d1 create my-kunimi-db
 ```
 
 ### 3. Initialize the Database Table
@@ -52,7 +52,7 @@ npx wrangler d1 create kunimi-db
 Apply the included database schema to create the required table for your remote environment.
 
 ```bash
-npx wrangler d1 execute kunimi-db --remote --file=./migrations/0001_initial.sql
+npx wrangler d1 execute my-kunimi-db --remote --file=./migrations/0001_initial.sql
 ```
 
 ### 4. Configure `wrangler.jsonc`
