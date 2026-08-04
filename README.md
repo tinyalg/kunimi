@@ -34,7 +34,7 @@ If you prefer to set up resources manually using the command line, follow these 
 ### 1. Clone & Install
 Clone this repository to your local machine and install the dependencies.
 ```bash
-git clone [https://github.com/tinyalg/kunimi.git](https://github.com/tinyalg/kunimi.git)
+git clone https://github.com/tinyalg/kunimi.git
 cd kunimi
 npm install
 ```
@@ -52,7 +52,7 @@ npx wrangler d1 create kunimi-db
 Apply the included database schema to create the required table for your remote environment.
 
 ```bash
-npx wrangler d1 execute kunimi-db --remote --file=./migrations/BASIC_PASS=0001_initial.sql
+npx wrangler d1 execute kunimi-db --remote --file=./migrations/0001_initial.sql
 ```
 
 ### 4. Configure Environment Variables
