@@ -41,11 +41,15 @@ npm install
 
 ### 2. Create a D1 Database
 
-Create a new Cloudflare D1 database and add the generated `database_id` to your `wrangler.jsonc` file.
+Create a new Cloudflare D1 database.
 
 ```bash
 npx wrangler d1 create my-kunimi-db
+
 ```
+
+This command will output a `database_id`.
+*Note: If Wrangler asks "Would you like Wrangler to add it on your behalf?", **press `N` (No)**.*
 
 ### 3. Initialize the Database Table
 
@@ -57,13 +61,25 @@ npx wrangler d1 execute my-kunimi-db --remote --file=./migrations/0001_initial.s
 
 ### 4. Configure `wrangler.jsonc`
 
-Edit your `wrangler.jsonc` to set your custom project name, the domains you want to track, and your dashboard username.
+Edit your `wrangler.jsonc`.
+
+1. Paste the `database_id` you got in Step 2.
+2. Set your custom project name (`name`).
+3. Set your target domains and dashboard username in the `vars` block.
 
 ```jsonc
 {
   "name": "my-kunimi", // Change to your preferred project name (this will be part of your URL)
   
   // ...other settings...
+
+  "d1_databases": [
+    {
+      "binding": "DB", // DO NOT CHANGE THIS
+      "database_name": "my-kunimi-db",
+      "database_id": "YOUR_DATABASE_ID_HERE" // Paste your ID here
+    }
+  ],
 
   "vars": {
     "ALLOWED_DOMAINS": "example.com, myblog.net",
