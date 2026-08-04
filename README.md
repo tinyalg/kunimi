@@ -55,15 +55,22 @@ Apply the included database schema to create the required table for your remote 
 npx wrangler d1 execute kunimi-db --remote --file=./migrations/0001_initial.sql
 ```
 
-### 4. Configure Environment Variables
+### 4. Configure `wrangler.jsonc`
 
-Edit your `wrangler.jsonc` to specify the domains you want to track and your dashboard username.
+Edit your `wrangler.jsonc` to set your custom project name, the domains you want to track, and your dashboard username.
 
 ```jsonc
+{
+  "name": "my-kunimi", // Change to your preferred project name (this will be part of your URL)
+  
+  // ...other settings...
+
   "vars": {
     "ALLOWED_DOMAINS": "example.com, myblog.net",
     "BASIC_USER": "admin"
   }
+}
+
 ```
 
 ### 5. Set Dashboard Password

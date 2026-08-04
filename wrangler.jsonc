@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "kunimi",
+	"name": "my-kunimi",
 	"main": "src/index.ts",
 	"compatibility_date": "2026-08-03",
 	"compatibility_flags": [

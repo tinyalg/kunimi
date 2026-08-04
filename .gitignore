@@ -18,6 +18,7 @@ dist/
 
 # Local data and backup files
 backup.sql
+wrangler.local.jsonc
 
 # System files
 .DS_Store
