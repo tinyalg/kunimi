@@ -19,10 +19,10 @@
   "cloudflare": {
     "bindings": {
       "BASIC_USER": {
-        "description": "ダッシュボード用のユーザー名（環境変数として保存されます）"
+        "description": "Username for the dashboard"
       },
       "BASIC_PASS": {
-        "description": "ダッシュボード用のパスワード（暗号化されます。後から確認できないためメモを残してください）"
+        "description": "Password for the dashboard"
       }
     }
   },
