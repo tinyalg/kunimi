@@ -2,7 +2,7 @@ import localDomains from './allowed-domains.json';
 import { dashboardHtml } from './dashboard';
 
 export interface Env {
-  kunimi_db: D1Database;
+  DB: D1Database;
   ALLOWED_DOMAINS: string;
   BASIC_USER: string;
   BASIC_PASS?: string;
@@ -66,7 +66,7 @@ export default {
 
         try {
           // ★ 生ログのINSERTではなく、集計テーブルへのUPSERTに変更
-          await env.kunimi_db.prepare(`
+          await env.DB.prepare(`
             INSERT INTO hourly_stats (date, hour, host, referrer, country, region, path, device)
             VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)
             ON CONFLICT(date, hour, host, referrer, country, region, path, device)
@@ -149,7 +149,7 @@ export default {
     // ① 地図用のAPI（UUではなくPVの集計に変更）
     if (requestUrl.pathname === '/api/stats') {
       const validDays = getValidDays(requestUrl);
-      const { results } = await env.kunimi_db.prepare(`
+      const { results } = await env.DB.prepare(`
         SELECT country, SUM(pv_count) as pv 
         FROM hourly_stats 
         WHERE date >= date('now', '-${validDays} days')
@@ -166,7 +166,7 @@ export default {
       const offset = (page - 1) * limit;
 
       // 1. 全レコード数の取得（ページ数計算のため）
-      const countResult = await env.kunimi_db.prepare(`
+      const countResult = await env.DB.prepare(`
         SELECT COUNT(*) as total FROM (
           SELECT 1
           FROM hourly_stats 
@@ -179,7 +179,7 @@ export default {
       const totalPages = totalRows > 0 ? Math.ceil(totalRows / limit) : 1;
 
       // 2. 現在のページのデータを取得
-      const { results } = await env.kunimi_db.prepare(`
+      const { results } = await env.DB.prepare(`
         SELECT 
           date,
           hour,

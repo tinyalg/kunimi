@@ -17,7 +17,7 @@
 	"upload_source_maps": true,
 	"d1_databases": [
 		{
-			"binding": "kunimi_db",
+			"binding": "DB",
 			"database_name": "kunimi-db",
 			"database_id": "YOUR_DATABASE_ID"
 		}
