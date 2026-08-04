@@ -19,7 +19,7 @@
 		{
 			"binding": "kunimi_db",
 			"database_name": "kunimi-db",
-			"database_id": "2a667473-2e71-49fa-949f-9c89b456c5d1"
+			"database_id": "YOUR_DATABASE_ID"
 		}
 	],
 	"assets": { "directory": "./public" }
