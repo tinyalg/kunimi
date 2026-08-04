@@ -17,7 +17,7 @@ True to its name, Kunimi is a lightweight, self-hosted web analytics solution de
 ### Option 1: 1-Click Deploy (Recommended)
 The easiest way to get started is by deploying directly to your Cloudflare account. Cloudflare will automatically clone this repository, provision the D1 database, run the initial schema migrations, and set up your environment variables.
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/tinyalg/kunimi/tree/pre-release)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/tinyalg/kunimi/tree/main)
 
 *Note: During the setup process, you will be prompted to enter a `BASIC_USER` and `BASIC_PASS` for your dashboard.*
 
