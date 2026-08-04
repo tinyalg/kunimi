@@ -1,0 +1,32 @@
+{
+  "name": "kunimi",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "npm run db:migrations:apply && wrangler deploy",
+    "db:migrations:apply": "wrangler d1 migrations apply DB --remote"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260729.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.115.0"
+  },
+  "cloudflare": {
+    "bindings": {
+      "BASIC_USER": {
+        "description": "Username for the dashboard"
+      },
+      "BASIC_PASS": {
+        "description": "Password for the dashboard"
+      }
+    }
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.10.1"
+  }
+}
